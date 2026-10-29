@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b0d14" />
+<title>Sasaki's Collections — Factory OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="loginScreen" class="login-screen">
+  <div class="login-orb orb-a"></div><div class="login-orb orb-b"></div>
+  <form id="loginForm" class="login-card">
+    <div class="brand-mark large">SC<span>✦</span></div>
+    <div class="eyebrow">FACTORY OPERATIONS PLATFORM</div>
+    <h1>Sasaki's <span>Collections</span></h1>
+    <p class="muted">Your production floor, in control.</p>
+    <label>Username<input id="loginUser" autocomplete="username" value="admin" required></label>
+    <label>Password<input id="loginPass" type="password" autocomplete="current-password" value="admin123" required></label>
+    <button class="btn primary full" type="submit">Enter workspace <span>↗</span></button>
+    <div class="login-hint">Demo access · <b>admin</b> / <b>admin123</b></div>
+    <div id="loginError" class="error-text"></div>
+  </form>
+  <div class="login-foot">SASAKI'S COLLECTIONS <span>•</span> FACTORY OS v1.0</div>
+</div>
+
+<div id="app" class="app-shell hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-brand"><div class="brand-mark">SC<span>✦</span></div><div><strong>Sasaki's</strong><small>COLLECTIONS</small></div></div>
+    <div class="workspace-pill"><span class="pulse"></span> FACTORY WORKSPACE <span class="chevron">⌄</span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav">
+      <button class="nav-item active" data-page="dashboard"><span class="nav-icon">◫</span> Overview <span class="nav-shortcut">01</span></button>
+      <button class="nav-item" data-page="inventory"><span class="nav-icon">▤</span> Inventory <span class="nav-count" id="navStockCount">0</span></button>
+      <button class="nav-item" data-page="production"><span class="nav-icon">◈</span> Production</button>
+      <button class="nav-item" data-page="costing"><span class="nav-icon">⌁</span> Material costing</button>
+      <button class="nav-item" data-page="employees"><span class="nav-icon">♙</span> Employees</button>
+      <button class="nav-item" data-page="reports"><span class="nav-icon">▥</span> Reports & export</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="side-status"><span class="status-dot"></span><div><b>System operational</b><small>Local data storage active</small></div></div>
+      <button id="logoutBtn" class="nav-item logout"><span class="nav-icon">↪</span> Sign out</button>
+      <div class="side-version">SASAKI OS <span>v1.0.0</span></div>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="topbar">
+      <button id="mobileMenu" class="icon-btn menu-toggle" aria-label="Open menu">☰</button>
+      <div class="breadcrumb"><span>Workspace</span><i>/</i><b id="breadcrumbCurrent">Overview</b></div>
+      <div class="top-actions"><div class="live-clock"><span class="pulse"></span><span id="clock">--:--</span></div><button id="quickAdd" class="btn primary small">＋ Quick entry</button><div class="avatar">SC</div></div>
+    </header>
+    <div class="content" id="pageContent"></div>
+    <footer class="app-footer"><span>© 2026 Sasaki's Collections</span><span><i class="status-dot"></i> All changes saved on this device</span></footer>
+  </main>
+</div>
+<div id="modalRoot"></div>
+<div id="toastRoot" class="toast-root"></div>
+<script src="app.js"></script>
+</body>
+</html>
