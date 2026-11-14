@@ -1,0 +1,19 @@
+{
+  "name": "ZAZAN COLLECTIONS",
+  "short_name": "ZAZAN",
+  "description": "Personal anime, manga and TV series archive",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08080c",
+  "theme_color": "#08080c",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

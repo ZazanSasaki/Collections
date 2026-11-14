@@ -1,63 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0b0d14" />
-<title>Sasaki's Collections — Factory OS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div id="loginScreen" class="login-screen">
-  <div class="login-orb orb-a"></div><div class="login-orb orb-b"></div>
-  <form id="loginForm" class="login-card">
-    <div class="brand-mark large">SC<span>✦</span></div>
-    <div class="eyebrow">FACTORY OPERATIONS PLATFORM</div>
-    <h1>Sasaki's <span>Collections</span></h1>
-    <p class="muted">Your production floor, in control.</p>
-    <label>Username<input id="loginUser" autocomplete="username" value="admin" required></label>
-    <label>Password<input id="loginPass" type="password" autocomplete="current-password" value="admin123" required></label>
-    <button class="btn primary full" type="submit">Enter workspace <span>↗</span></button>
-    <div class="login-hint">Demo access · <b>admin</b> / <b>admin123</b></div>
-    <div id="loginError" class="error-text"></div>
-  </form>
-  <div class="login-foot">SASAKI'S COLLECTIONS <span>•</span> FACTORY OS v1.0</div>
-</div>
-
-<div id="app" class="app-shell hidden">
-  <aside class="sidebar" id="sidebar">
-    <div class="side-brand"><div class="brand-mark">SC<span>✦</span></div><div><strong>Sasaki's</strong><small>COLLECTIONS</small></div></div>
-    <div class="workspace-pill"><span class="pulse"></span> FACTORY WORKSPACE <span class="chevron">⌄</span></div>
-    <div class="nav-label">WORKSPACE</div>
-    <nav class="nav">
-      <button class="nav-item active" data-page="dashboard"><span class="nav-icon">◫</span> Overview <span class="nav-shortcut">01</span></button>
-      <button class="nav-item" data-page="inventory"><span class="nav-icon">▤</span> Inventory <span class="nav-count" id="navStockCount">0</span></button>
-      <button class="nav-item" data-page="production"><span class="nav-icon">◈</span> Production</button>
-      <button class="nav-item" data-page="costing"><span class="nav-icon">⌁</span> Material costing</button>
-      <button class="nav-item" data-page="employees"><span class="nav-icon">♙</span> Employees</button>
-      <button class="nav-item" data-page="reports"><span class="nav-icon">▥</span> Reports & export</button>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="side-status"><span class="status-dot"></span><div><b>System operational</b><small>Local data storage active</small></div></div>
-      <button id="logoutBtn" class="nav-item logout"><span class="nav-icon">↪</span> Sign out</button>
-      <div class="side-version">SASAKI OS <span>v1.0.0</span></div>
-    </div>
-  </aside>
-
-  <main class="main-area">
-    <header class="topbar">
-      <button id="mobileMenu" class="icon-btn menu-toggle" aria-label="Open menu">☰</button>
-      <div class="breadcrumb"><span>Workspace</span><i>/</i><b id="breadcrumbCurrent">Overview</b></div>
-      <div class="top-actions"><div class="live-clock"><span class="pulse"></span><span id="clock">--:--</span></div><button id="quickAdd" class="btn primary small">＋ Quick entry</button><div class="avatar">SC</div></div>
-    </header>
-    <div class="content" id="pageContent"></div>
-    <footer class="app-footer"><span>© 2026 Sasaki's Collections</span><span><i class="status-dot"></i> All changes saved on this device</span></footer>
-  </main>
-</div>
-<div id="modalRoot"></div>
-<div id="toastRoot" class="toast-root"></div>
-<script src="app.js"></script>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08080c"><title>ZAZAN COLLECTIONS</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg"><link rel="stylesheet" href="styles.css">
+</head><body>
+<header><a class="brand" href="#"><span class="logo">Z<span>✦</span></span><span>ZAZAN <b>COLLECTIONS</b><small>PERSONAL MEDIA ARCHIVE</small></span></a>
+<div class="actions"><button id="importBtn" title="Import backup">↧</button><button id="exportBtn" title="Export backup">↥</button><input id="importFile" type="file" accept=".json,application/json" hidden></div></header>
+<main>
+<section class="hero"><div class="kicker">✦ YOUR WORLD. YOUR ARCHIVE.</div><h1>COLLECT<br><em>YOUR STORIES.</em></h1><p>Every anime. Every volume. Every series.<br>Kept exactly how you want it.</p><button class="primary" id="addTop">＋ ADD TO COLLECTION</button><div class="heroZ">Z</div></section>
+<section class="stats">
+<div><small>01 / TOTAL ARCHIVE</small><strong id="total">0</strong><label>ALL YOUR TITLES</label></div>
+<div><small>02 / COMPLETED</small><strong id="completed">0</strong><label>FINISHED STORIES</label></div>
+<div><small>03 / IN PROGRESS</small><strong id="progress">0</strong><label>CURRENTLY ACTIVE</label></div>
+<div><small>04 / PLANNED</small><strong id="planned">0</strong><label>ON YOUR WATCHLIST</label></div>
+</section>
+<section class="library"><div class="heading"><div><small>THE COLLECTION</small><h2>YOUR <em>ARCHIVE</em></h2></div><b><span id="resultCount">0</span> ENTRIES</b></div>
+<div class="toolbar"><input id="search" placeholder="⌕  Search titles, genres, notes..." type="search"><button class="primary" id="addMore">＋ ADD NEW</button></div>
+<nav id="tabs"><button class="active" data-cat="All">ALL <i id="nAll">0</i></button><button data-cat="Anime">ANIME <i id="nAnime">0</i></button><button data-cat="Manga">MANGA <i id="nManga">0</i></button><button data-cat="TV Series">TV SERIES <i id="nTV">0</i></button></nav>
+<div class="filters"><select id="statusFilter"><option>All statuses</option><option>Plan to Watch</option><option>Watching</option><option>Reading</option><option>Completed</option><option>On Hold</option><option>Dropped</option></select>
+<select id="sort"><option value="recent">Recently added</option><option value="az">Title A–Z</option><option value="za">Title Z–A</option><option value="rating">Highest rated</option></select><span>TAP A CARD FOR DETAILS</span></div>
+<div id="grid" class="grid"></div><div id="empty" class="empty"><b>Z✦</b><h3>YOUR ARCHIVE IS WAITING.</h3><p>Add a title and make this space yours.</p><button class="outline" id="firstAdd">＋ CREATE FIRST ENTRY</button></div>
+</section><footer><b>Z</b> BUILT FOR THE STORIES THAT STAY WITH YOU. <span>ZAZAN COLLECTIONS © 2026</span></footer>
+</main>
+<dialog id="entryDialog"><form id="entryForm"><div class="modalHead"><div><small>ARCHIVE MANAGEMENT</small><h2 id="formTitle">NEW <em>ENTRY</em></h2></div><button type="button" class="x" id="closeEntry">×</button></div>
+<input id="entryId" type="hidden">
+<div class="formGrid">
+<label class="wide">TITLE *<input id="title" required maxlength="120" placeholder="e.g. Tokyo Ghoul"></label>
+<label>CATEGORY<select id="category"><option>Anime</option><option>Manga</option><option>TV Series</option></select></label>
+<label>STATUS<select id="status"><option>Plan to Watch</option><option>Watching</option><option>Reading</option><option>Completed</option><option>On Hold</option><option>Dropped</option></select></label>
+<label>GENRE / TAGS<input id="genres" placeholder="Action, Dark Fantasy"></label><label>YEAR<input id="year" type="number" min="1900" max="2100" placeholder="2026"></label>
+<label>YOUR RATING (0–10)<input id="rating" type="number" min="0" max="10" step=".5" placeholder="Not rated"></label><label>PROGRESS<input id="progressText" placeholder="Episode 12 / Chapter 45"></label>
+<label class="wide">POSTER — UPLOAD FROM PHONE<input id="posterFile" type="file" accept="image/*"></label><div id="preview" class="preview wide">POSTER PREVIEW</div>
+<label class="wide">PERSONAL NOTES<textarea id="notes" rows="3" maxlength="1000" placeholder="Thoughts, favourite character, where you left off..."></textarea></label>
+</div><div class="modalActions"><button type="button" class="outline" id="cancel">CANCEL</button><button class="primary">SAVE TO ARCHIVE ↗</button></div><p class="privacy">PRIVATE LOCAL STORAGE · SAVED ON THIS DEVICE</p>
+</form></dialog>
+<dialog id="detailDialog"><div class="detail"><button class="x" id="closeDetail">×</button><div id="detailBody"></div></div></dialog>
+<div id="toast"></div><script src="legacy-data.js"></script><script src="app.js"></script></body></html>
