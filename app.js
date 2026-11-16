@@ -21,22 +21,4 @@ $('tabs').onclick=e=>{let b=e.target.closest('[data-cat]');if(!b)return;cat=b.da
 ['search','statusFilter','sort'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
 $('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify({app:'ZAZAN COLLECTIONS',version:2,exportedAt:new Date().toISOString(),entries:items},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='zazan-collections-backup.json';a.click();URL.revokeObjectURL(url);toast('BACKUP EXPORTED')};
 $('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text()),list=Array.isArray(d)?d:(d.entries||d.items);if(!Array.isArray(list))throw Error();if(!confirm(`Import ${list.length} entries? Matching IDs will be updated.`))return;for(let x of list){if(!x.title)continue;await save({id:x.id||crypto.randomUUID(),title:String(x.title),category:['Anime','Manga','TV Series'].includes(x.category)?x.category:'Anime',status:x.status||'Plan to Watch',genres:x.genres||'',year:x.year||'',rating:x.rating??'',progress:x.progress||'',notes:x.notes||'',poster:x.poster||x.image||'',createdAt:x.createdAt||Date.now(),updatedAt:Date.now()})}await refresh();toast('BACKUP IMPORTED')}catch{toast('INVALID BACKUP FILE')}finally{e.target.value=''}};
-async function importLegacyOnce(){
-  const key='zazan-v1-backup-imported';
-  if(localStorage.getItem(key)==='yes') return;
-  const old=Array.isArray(window.ZAZAN_LEGACY_ITEMS)?window.ZAZAN_LEGACY_ITEMS:[];
-  if(old.length){
-    const existing=new Set((await getAll()).map(x=>x.id));
-    let added=0;
-    for(const x of old){
-      if(!x.title || existing.has(x.id)) continue;
-      await save({...x, id:x.id||crypto.randomUUID(), poster:x.poster||'', createdAt:x.createdAt||Date.now(), updatedAt:x.updatedAt||x.createdAt||Date.now()});
-      added++;
-    }
-    localStorage.setItem(key,'yes');
-    return added;
-  }
-  localStorage.setItem(key,'yes');
-  return 0;
-}
-(async()=>{try{db=await openDB();const added=await importLegacyOnce();await refresh();if(added)toast(`${added} V1 TITLES ADDED TO YOUR ARCHIVE`)}catch(e){console.error(e);toast('LOCAL STORAGE UNAVAILABLE')}if('serviceWorker'in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(console.error)})();
+(async()=>{try{db=await openDB();await refresh()}catch(e){console.error(e);toast('LOCAL STORAGE UNAVAILABLE')}if('serviceWorker'in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(console.error)})();

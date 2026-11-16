@@ -1,7 +1,5 @@
-# ZAZAN COLLECTIONS v2.1
+# ZAZAN COLLECTIONS v2
 Dark black/red personal Anime, Manga and TV Series archive.
-
-Includes your Version 1 archive: 167 existing titles are automatically added on first launch (existing Version 2 entries are preserved). Version 1 posters/images and original title/status/category/notes are carried over where present. New V2 fields such as genres, year, rating and progress start blank because they were not included in the V1 backup.
 
 Features: manual poster upload (8 MB per image), add/edit/delete, categories, statuses, genre tags, year, personal rating, progress, notes, search, filters, sorting, dashboard counters, JSON backup export/import, IndexedDB local storage and offline-capable PWA.
 
